@@ -3,10 +3,9 @@ import Head from "next/head";
 import { LazyImage } from "../components/Randomfox";
 import { useState } from "react";
 import type { MouseEventHandler } from "react";
+import { random } from 'lodash'
 
-const random = () => Math.floor(Math.random() * 123) + 1;
-
-type ImageItem = { id: string; url: string };
+const myRandom = () => random(1, 123);
 
 const generateId = () => Math.random().toString(36).substr(2, 9);
 
@@ -17,7 +16,7 @@ const Home: NextPage = () => {
     event.preventDefault();
     const newImageItem: ImageItem = {
       id: generateId(),
-      url: `https://randomfox.ca/images/${random()}.jpg`,
+      url: `https://randomfox.ca/images/${myRandom()}.jpg`,
     };
     setImages([...images, newImageItem]);
   };
@@ -31,7 +30,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <h1 className="text-3xl font-bold underline">Hello world!</h1>
+        <h1 className="text-3xl font-bold underline">FOX IMAGES GENERATOR </h1>
         <button onClick={addNewFox}>Add fox</button>
         {images.map(({ id, url }) => (
           <div className="p-4" key={id}>
